@@ -1,0 +1,22 @@
+{
+  "name": "jasondiary",
+  "version": "1.0.0",
+  "description": "Diario de Jason el perrito.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aime-angulo/jasondiary.git"
+  },
+  "author": "Aime Angulo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aime-angulo/jasondiary/issues"
+  },
+  "homepage": "https://github.com/aime-angulo/jasondiary#readme",
+  "dependencies": {
+    "angular": "^1.6.5"
+  }
+}
