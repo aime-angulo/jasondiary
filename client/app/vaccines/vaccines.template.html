@@ -1,0 +1,60 @@
+<header>
+    <div class="header-title">Vaccines</div>
+    <button class="btn btn-sm btn-success" *ngIf="showCards" (click)="toggleCards()"> <i class="fa fa-plus-circle fa-lg"></i> Add record</button>
+</header>
+<div class="component-content">
+    <div *ngIf="showCards">
+        <div *ngIf="records.length > 0">
+            <div class="card" *ngFor="let vaccine of records; let i = index">
+                <h4 class="card-header alert-primary">{{vaccine.name}}</h4>
+                <div class="card-body">
+                    <button class="btn btn-danger btn-sm float-right" (click)="deleteRecord(i)"><i class="fa fa-times fa-lg" placement="right" ngbTooltip="Delete vaccine"></i></button>
+                    <h4 class="card-title">{{+"Next shot in "+vaccine.validity_value + " " + vaccine.validity_unit}}</h4>
+                    <p class="card-text">${{vaccine.cost | currency}}</p>
+                    <p class="card-text">{{vaccine.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="records.length === 0" class="col">
+            <div class="alert alert-danger">No hay datos</div>
+            <button class="btn" (click)="toggleCards()">Presiona aquí para iniciar</button>
+        </div>
+    </div>
+    <div *ngIf="!showCards">
+        <form (ngSubmit)="onSubmit()" #componentForm="ngForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="vaccine.name" type="text" class="form-control" name="name" placeholder="Name" autofocus required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input [(ngModel)]="vaccine.date" type="date" class="form-control" name="date" placeholder="Date">
+            </div>
+
+            <div class="form-group">
+                <label for="validity">Validity</label>
+                <div class="form-row">
+                    <div class="col">
+                        <input [(ngModel)]="vaccine.validity_value" type="number" class="form-control" name="validity_value" placeholder="Validity">
+                    </div>
+                    <div class="col">
+                        <select [(ngModel)]="vaccine.validity_unit" class="form-control" name="validity_unit">
+                            <option>Months</option>
+                            <option>Year</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input [(ngModel)]="vaccine.cost" type="number" class="form-control" name="cost" placeholder="Cost">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea [(ngModel)]="vaccine.description" class="form-control" name="description" placeholder="Description" rows="4"></textarea>
+            </div>
+            <button class="btn btn-danger" type="button" (click)="toggleCards()">Cancel</button>
+            <button class="btn btn-default" type="submit" [disabled]="componentForm.invalid">Save</button>
+        </form>
+    </div>
+</div>

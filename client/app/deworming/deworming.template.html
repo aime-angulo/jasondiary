@@ -1,0 +1,42 @@
+<header>
+    <div class="header-title">Deworming</div>
+    <button class="btn btn-sm btn-success" *ngIf="showCards" (click)="toggleCards()"> <i class="fa fa-plus-circle fa-lg"></i> Add record</button>
+</header>
+<div class="component-content">
+    <div *ngIf="showCards">
+        <div *ngIf="records.length > 0">
+            <div class="card" *ngFor="let deworming of records; let i = index">
+                <h4 class="card-header alert-primary">Next Deworming</h4>
+                <div class="card-body">
+                    <button class="btn btn-danger btn-sm float-right" (click)="deleteRecord(i)"><i class="fa fa-times fa-lg" placement="right" ngbTooltip="Delete vaccine"></i></button>
+                    <h4 class="card-title">{{deworming.date}}</h4>
+                    <p class="card-text">{{deworming.description}}</p>
+                    <p class="card-text">{{deworming.cost | currency}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="records.length === 0" class="col">
+            <div class="alert alert-danger">No hay datos</div>
+            <button class="btn" (click)="toggleCards()">Presiona aquí para iniciar</button>
+        </div>
+    </div>
+    <div *ngIf="!showCards">
+        <form (ngSubmit)="onSubmit()" #componentForm="ngForm">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input [(ngModel)]="deworming.date" type="date" class="form-control" name="date" placeholder="Enter date" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input [(ngModel)]="deworming.description" type="text" class="form-control" name="description" placeholder="Enter description"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input [(ngModel)]="deworming.cost" type="number" class="form-control" name="cost" placeholder="Cost" required>
+            </div>
+            <button class="btn btn-danger" type="button" (click)="toggleCards()">Cancel</button>
+            <button class="btn btn-primary" type="submit" [disabled]="componentForm.invalid">Save</button>
+        </form>
+    </div>
+</div>

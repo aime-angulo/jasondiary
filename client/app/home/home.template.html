@@ -1,0 +1,37 @@
+<header>
+    <div class="header-title" align="center">Welcome</div>
+</header>
+<div class="component-content">
+    <div class="row margin10" *ngIf="info">
+        <div class="card bg-dark text-secondary">
+            <img class="card-img-top" src="{{info.mainPhoto}}" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title text-warning">NOMBRE: {{info.name}}</h4>
+                <h5 class="card-title text-secondary">EDAD: {{age}} años</h5>
+                <p class="card-text text-white">{{info.bio}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card" *ngIf="vaccine">
+        <h4 class="card-header alert-warning">{{+"Next shot in "+vaccine.validity_value + " " + vaccine.validity_unit}}</h4>
+        <div class="card-body">
+            <h4 class="card-title">{{vaccine.name}}</h4>
+            <p class="card-text">{{vaccine.date}}</p>
+            <p class="card-text">{{vaccine.description}}</p>
+            <a href="../vaccines" class="btn btn-dark">Go to VACCINES PAGE</a>
+        </div>
+    </div>
+    <div class="card" *ngIf="history">
+        <h4 class="card-header alert-info">{{history.disease}}</h4>
+        <div class="card-body">
+            <h4 class="card-title">{{history.cost}}</h4>
+            <p class="card-text">{{history.date}}</p>
+            <p class="card-text">{{history.treatment}}</p>
+            <a href="../history" class="btn btn-dark">Go to HISTORY PAGE</a>
+        </div>
+    </div>
+    <div *ngIf="!info">
+        <div class="alert alert-danger">No hay datos</div>
+        <button class="btn">Presiona aquí para iniciar</button>
+    </div>
+</div>

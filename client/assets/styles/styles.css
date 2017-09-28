@@ -1,0 +1,25 @@
+#router-container {
+    margin-top: 56px;
+}
+
+header {
+    position: relative;
+    background: #5392b7;
+    padding: 10px 0 10px 14px;
+}
+
+header .header-title {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+header .btn {
+    position: absolute;
+    top: 9px;
+    right: 14px;
+}
+
+.component-content {
+    padding: 10px;
+}

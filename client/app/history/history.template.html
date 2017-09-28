@@ -1,0 +1,49 @@
+<!--
+    Ayuda para el futuro!
+    Los <input> deben llevar SIEMPRE "name", no sólo "ngModel" ni sólo "id"
+-->
+<header>
+    <div class="header-title">Medical history</div>
+    <button class="btn btn-sm btn-success" *ngIf="showCards" (click)="toggleCards()"> <i class="fa fa-plus-circle fa-lg"></i> Add record</button>
+</header>
+<div class="component-content">
+    <div *ngIf="showCards">
+        <div *ngIf="records.length > 0">
+            <div class="card" *ngFor="let history of records; let i = index">
+                <h4 class="card-header alert-primary">{{history.disease}}</h4>
+                <div class="card-body">
+                    <button class="btn btn-danger btn-sm float-right" (click)="deleteRecord(i)"><i class="fa fa-times fa-lg" placement="right" ngbTooltip="Delete history"></i></button>
+                    <h4 class="card-title">{{history.date}}</h4>
+                    <p class="card-text">{{history.treatment}}</p>
+                    <p class="card-text">{{history.cost | currency}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="records.length === 0" class="col">
+            <div class="alert alert-danger">No hay datos</div>
+            <button class="btn" (click)="toggleCards()">Presiona aquí para iniciar</button>
+        </div>
+    </div>
+    <div *ngIf="!showCards">
+        <form (ngSubmit)="onSubmit()" #componentForm="ngForm">
+            <div class="form-group">
+                <label for="disease">Disease</label>
+                <input [(ngModel)]="history.disease" type="text" class="form-control" name="disease" placeholder="Disease">
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input [(ngModel)]="history.date" type="date" class="form-control" name="date" placeholder="Date">
+            </div>
+            <div class="form-group">
+                <label for="treatment">Treatment</label>
+                <input [(ngModel)]="history.treatment" type="text" class="form-control" name="treatment" placeholder="Treatment">
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input [(ngModel)]="history.cost" type="number" class="form-control" name="cost" placeholder="Cost">
+            </div>
+            <button class="btn btn-danger" type="button" (click)="toggleCards()">Cancel</button>
+            <button class="btn btn-default" type="submit" [disabled]="componentForm.invalid">Save</button>
+        </form>
+    </div>
+</div>
